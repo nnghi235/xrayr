@@ -42,7 +42,7 @@ else
   echo -e "  Không Phát Hiện Được Giản Đồ, Hãy Sử Dụng Lược Đồ Mặc Định: ${arch}${plain}"
 fi
 
-echo "  Bắt Đầu Cài Đặt: ${arch}"
+echo "  Tiến Trình: ${arch}"
 
 if [ "$(getconf WORD_BIT)" != '32' ] && [ "$(getconf LONG_BIT)" != '64' ] ; then
     echo "  Phần Mềm Này Không Hỗ Trợ Hệ Thống 32-bit (x86), Vui Lòng Sử Dụng Hệ Thống 64-bit (x86_64), Nếu Phát Hiện Sai, Vui Lòng Liên Hệ ADMIN SPEED4g.XYZ"
