@@ -8,7 +8,7 @@ plain='\033[0m'
 version="v1.0.0"
 
 # check root
-[[ $EUID -ne 0 ]] && echo -e "  lỗi: Tập lệnh này phải được chạy với tư cách người dùng gốc！\n" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "  Lỗi: Bạn Chưa Cấp Quyền Root\n" && exit 1
 
 # check os
 if [[ -f /etc/redhat-release ]]; then
@@ -26,7 +26,7 @@ elif cat /proc/version | grep -Eqi "ubuntu"; then
 elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
     release="centos"
 else
-    echo -e "  Phiên bản hệ thống không được phát hiện, vui lòng liên hệ với tác giả kịch bản！${plain}\n" && exit 1
+    echo -e "  Phiên Bản Không Hợp Lệ Vui Lòng Liên Hệ ADMIN SPEED4g.XYZ ${plain}\n" && exit 1
 fi
 
 os_version=""
@@ -70,7 +70,7 @@ confirm() {
 }
 
 confirm_restart() {
-    confirm "  Có khởi động lại XrayR không" "y"
+    confirm "  Bạn Có Muốn Khởi Động Lại XrayR Không ?" "y"
     if [[ $? == 0 ]]; then
         restart
     else
@@ -79,12 +79,12 @@ confirm_restart() {
 }
 
 before_show_menu() {
-    echo && echo -n -e "  Nhấn enter để quay lại menu chính: ${plain}" && read temp
+    echo && echo -n -e "  Nhấn Enter Để Quay Lại Menu Chính: ${plain}" && read temp
     show_menu
 }
 
 install() {
-    bash <(curl -Ls https://raw.githubusercontent.com/Quoctai0209/xrayr/master/install.sh)
+    bash <(curl -Ls https://raw.githubusercontent.com/nnghi235/xrayr/main/install.sh)
     if [[ $? == 0 ]]; then
         if [[ $# == 0 ]]; then
             start
@@ -96,7 +96,7 @@ install() {
 
 update() {
     if [[ $# == 0 ]]; then
-        echo && echo -n -e "  Nhập phiên bản được chỉ định (phiên bản mới nhất mặc định): " && read version
+        echo && echo -n -e "  Nhập Phiên Bản Được Chỉ Định ( Mặc Định Phiên Bản Mới Nhất ): " && read version
     else
         version=$2
     fi
@@ -108,9 +108,9 @@ update() {
 #        fi
 #        return 0
 #    fi
-    bash <(curl -Ls https://raw.githubusercontent.com/Quoctai0209/xrayr/master/install.sh) $version
+    bash <(curl -Ls https://raw.githubusercontent.com/nnghi235/xrayr/main/install.sh) $version
     if [[ $? == 0 ]]; then
-        echo -e "  Cập nhật hoàn tất, XrayR đã được khởi động lại tự động, vui lòng sử dụng XrayR log để xem nhật ký đang chạy ${plain}"
+        echo -e "  Cập Nhật Hoàn Tất, XrayR Đã Được Khởi Động Lại Tự Động ${plain}"
         exit
     fi
 
@@ -120,16 +120,16 @@ update() {
 }
 
 config() {
-    echo "  XrayR sẽ tự động khởi động lại sau khi sửa đổi cấu hình"
+    echo "  XrayR Sẽ Tự Động Khởi Động Lại Sau Khi Sửa Đổi Cấu Hình"
     vi /etc/XrayR/config.yml
     sleep 2
     check_status
     case $? in
         0)
-            echo -e "  Trạng thái XrayR: đã được chạy${plain}"
+            echo -e "  Trạng Thái XrayR: Đang Hoạt Động ${plain}"
             ;;
         1)
-            echo -e "  Nó được phát hiện rằng bạn không khởi động XrayR hoặc XrayR không tự khởi động lại, hãy kiểm tra nhật ký？[Y/n]" && echo
+            echo -e "  ADMIN SPEED4G.XYZ Phát Hiện Bạn Không Khởi Động XrayR Hoặc XrayR Không Tự Khởi Động Lại, Bạn Có Muốn Kiểm Tra Không ? [Y/n]" && echo
             read -e -p "(mặc định: y):" yn
             [[ -z ${yn} ]] && yn="y"
             if [[ ${yn} == [Yy] ]]; then
@@ -137,12 +137,12 @@ config() {
             fi
             ;;
         2)
-            echo -e "  Trạng thái XrayR: Chưa được cài đặt${plain}"
+            echo -e "  Trạng Thái XrayR: Chưa Được Cài Đặt ${plain}"
     esac
 }
 
 uninstall() {
-    confirm "  Bạn có chắc chắn muốn gỡ cài đặt XrayR không?" " n"
+    confirm "  Bạn Có Chắc Chắn Muốn Gỡ Cài Đặt XrayR Không ?" " n"
     if [[ $? != 0 ]]; then
         if [[ $# == 0 ]]; then
             show_menu
@@ -158,7 +158,7 @@ uninstall() {
     rm /usr/local/XrayR/ -rf
 
     echo ""
-    echo -e "  Gỡ cài đặt thành công, " # nếu bạn muốn xóa tập lệnh này, hãy chạy sau khi thoát tập lệnh rm /usr/bin/XrayR -f xóa"
+    echo -e "  Gỡ Cài Đặt Thành Công !, " # nếu bạn muốn xóa tập lệnh này, hãy chạy sau khi thoát tập lệnh rm /usr/bin/XrayR -f xóa"
     echo ""
 
     if [[ $# == 0 ]]; then
@@ -170,15 +170,15 @@ start() {
     check_status
     if [[ $? == 0 ]]; then
         echo ""
-        echo -e "  XrayR đã chạy rồi, không cần khởi động lại, nếu muốn khởi động lại, vui lòng chọn khởi động lại${plain}"
+        echo -e "  XrayR Đang Hoạt Động, Nếu Muốn Khởi Động Lại XrayR Vui Lòng Nhập XrayR Restart${plain}"
     else
         systemctl start XrayR
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
-            echo -e "  XrayR đã khởi động thành công, vui lòng sử dụng XrayR log để xem nhật ký đang chạy${plain}"
+            echo -e "  XrayR Khởi Động Thành Công ! (COPYRIGHT BY ADMIN SPEED4G.XYZ) ${plain}"
         else
-            echo -e "  XrayR có thể không khởi động được, vui lòng sử dụng XrayR log để xem thông tin nhật ký sau này${plain}"
+            echo -e "  XrayR Khởi Động Thất Bại, Vui Lòng Sử Dụng XrayR Log Để Kiểm Tra${plain}"
         fi
     fi
 
@@ -192,9 +192,9 @@ stop() {
     sleep 2
     check_status
     if [[ $? == 1 ]]; then
-        echo -e "  XrayR đã dừng thành công ${plain}"
+        echo -e "  XrayR Đã Dừng Thành Công !${plain}"
     else
-        echo -e "  XrayR không dừng được, có thể do thời gian dừng vượt quá hai giây, vui lòng kiểm tra thông tin nhật ký sau${plain}"
+        echo -e "  XrayR Không Dừng Được, Vui Lòng Sử Dụng XrayR Log Để Kiểm Tra${plain}"
     fi
 
     if [[ $# == 0 ]]; then
@@ -207,9 +207,9 @@ restart() {
     sleep 2
     check_status
     if [[ $? == 0 ]]; then
-        echo -e "  XrayR đã khởi động lại thành công, vui lòng sử dụng XrayR log để xem nhật ký đang chạy${plain}"
+        echo -e "  XrayR Khởi Động Lại Thành Công ! (COPYRIGHT BY ADMIN SPEED4G.XYZ)${plain}"
     else
-        echo -e "  XrayR có thể không khởi động được, vui lòng sử dụng XrayR log để xem thông tin nhật ký sau này${plain}"
+        echo -e "  XrayR Khởi Động Lại Thất Bại, Vui Lòng Sử Dụng XrayR Log Để Kiểm Tra${plain}"
     fi
     if [[ $# == 0 ]]; then
         before_show_menu
@@ -226,9 +226,9 @@ status() {
 enable() {
     systemctl enable XrayR
     if [[ $? == 0 ]]; then
-        echo -e "  XrayR được thiết lập để khởi động thành công${plain}"
+        echo -e "  XrayR Tự Động Khởi Động Thành Công${plain}"
     else
-        echo -e "  Thiết lập XrayR không thể tự động khởi động khi khởi động${plain}"
+        echo -e "  XrayR Tự Động Khởi Động Thất Bại${plain}"
     fi
 
     if [[ $# == 0 ]]; then
@@ -239,9 +239,9 @@ enable() {
 disable() {
     systemctl disable XrayR
     if [[ $? == 0 ]]; then
-        echo -e "  XrayR đã hủy khởi động tự động khởi động thành công${plain}"
+        echo -e "  Hủy XrayR Tự Khởi Động Thành Công${plain}"
     else
-        echo -e "  XrayR không thể hủy tự động khởi động khởi động${plain}"
+        echo -e "  Hủy XrayR Tự Khởi Động Thất Bại${plain}"
     fi
 
     if [[ $# == 0 ]]; then
@@ -257,7 +257,7 @@ show_log() {
 }
 
 install_bbr() {
-    bash <(curl -L -s https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh)
+    bash <(curl -L -s https://raw.githubusercontent.com/nnghi235/xrayr/main/tcp.sh)
     #if [[ $? == 0 ]]; then
     #    echo ""
     #    echo -e "${green}安装 bbr 成功，请重启服务器${plain}"
@@ -270,14 +270,14 @@ install_bbr() {
 }
 
 update_shell() {
-    wget -O /usr/bin/XrayR -N --no-check-certificate https://raw.githubusercontent.com/Quoctai0209/xrayr/master/XrayR.sh
+    wget -O /usr/bin/XrayR -N --no-check-certificate https://raw.githubusercontent.com/nnghi235/xrayr/main/XrayR.sh
     if [[ $? != 0 ]]; then
         echo ""
-        echo -e "  Không tải được script xuống, vui lòng kiểm tra xem máy có thể kết nối với Github không${plain}"
+        echo -e "  Không Tải Được Script Xuống, Vui Lòng Kiểm Tra Xem Máy Chủ Có Thể Kết Nối Với Github Không${plain}"
         before_show_menu
     else
         chmod +x /usr/bin/XrayR
-        echo -e "  Tập lệnh nâng cấp thành công, vui lòng chạy lại tập lệnh ${plain}" && exit 0
+        echo -e "  Tập Lệnh Nâng Cấp Thành Công, Vui Lòng Chạy Lại Tập Lệnh ${plain}" && exit 0
     fi
 }
 
@@ -307,7 +307,7 @@ check_uninstall() {
     check_status
     if [[ $? != 2 ]]; then
         echo ""
-        echo -e "  XrayR đã được cài đặt, vui lòng không cài đặt lại${plain}"
+        echo -e "  XrayR Đã Được Cài Đặt, Vui Lòng Không Cài Đặt Lại${plain}"
         if [[ $# == 0 ]]; then
             before_show_menu
         fi
@@ -321,7 +321,7 @@ check_install() {
     check_status
     if [[ $? == 2 ]]; then
         echo ""
-        echo -e "  Vui lòng cài đặt XrayR trước${plain}"
+        echo -e "  Vui Lòng Cài Đặt XrayR Trước${plain}"
         if [[ $# == 0 ]]; then
             before_show_menu
         fi
@@ -335,29 +335,29 @@ show_status() {
     check_status
     case $? in
         0)
-            echo -e "  Trạng thái XrayR: đã được chạy${plain}"
+            echo -e "  Trạng Thái XrayR: Đang Hoạt Động${plain}"
             show_enable_status
             ;;
         1)
-            echo -e "  Trạng thái XrayR: Không chạy${plain}"
+            echo -e "  Trạng Thái XrayR: Không Hoạt Động${plain}"
             show_enable_status
             ;;
         2)
-            echo -e "  Trạng thái XrayR: Chưa được cài đặt${plain}"
+            echo -e "  Trạng Thái XrayR: Chưa Được Cài Đặt${plain}"
     esac
 }
 
 show_enable_status() {
     check_enabled
     if [[ $? == 0 ]]; then
-        echo -e "  Có tự động bắt đầu không: Có${plain}"
+        echo -e "  XrayR Đang Tự Động Khởi Động${plain}"
     else
-        echo -e "  Có tự động khởi động hay không: Không${plain}"
+        echo -e "  XrayR Không Tự Động Khởi Động${plain}"
     fi
 }
 
 show_XrayR_version() {
-    echo -n "  Phiên bản XrayR："
+    echo -n "  Phiên Bản XrayR："
     /usr/local/XrayR/XrayR -version
     echo ""
     if [[ $# == 0 ]]; then
@@ -368,51 +368,63 @@ show_XrayR_version() {
 show_usage() {
     echo ''
     echo "------------[Nguyễn Nghị]------------"
+	echo "---------[ADMIN SPEED4G.XYZ]---------"
     echo "  Cách sử dụng tập lệnh quản lý XrayR: "
     echo "------------------------------------------"
-    echo "  XrayR              - Hiển thị menu quản trị (nhiều chức năng hơn) "
-    echo "  XrayR start        - Khởi động XrayR "
+    echo "  XrayR              - Hiển Thị Menu Quản Trị"
+    echo "  XrayR start        - Khởi Động XrayR "
     echo "  XrayR stop         - Dừng XrayR"
-    echo "  XrayR restart      - Khởi động lại XrayR"
-    echo "  XrayR status       - Xem trạng thái XrayR"
-    echo "  XrayR enable       - Đặt XrayR để bắt đầu tự động"
-    echo "  XrayR disable      - Hủy tự động khởi động XrayR"
-    echo "  XrayR log          - Xem nhật ký XrayR"
-    echo "  XrayR update       - Cập nhật XrayR"
-    echo "  XrayR update x.x.x - Cập nhật phiên bản được chỉ định XrayR"
-    echo "  XrayR install      - Cài đặt XrayR"
-    echo "  XrayR uninstall    - Gỡ cài đặt XrayR "
-    echo "  XrayR version      - Xem các phiên bản XrayR"
+    echo "  XrayR restart      - Khởi Động Lại XrayR"
+    echo "  XrayR status       - Xem Trạng Thái XrayR"
+    echo "  XrayR enable       - Cài Đặt XrayR Tự Động Khởi Động"
+    echo "  XrayR disable      - Hủy Tự Động Khởi Động XrayR"
+    echo "  XrayR log          - Xem Nhật Ký Hoạt Động"
+    echo "  XrayR update       - Cập Nhật XrayR"
+    echo "  XrayR update x.x.x - Cập Nhật Phiên Bản XrayR Được Chỉ Định"
+    echo "  XrayR install      - Cài Đặt XrayR"
+    echo "  XrayR uninstall    - Gỡ Cài Đặt XrayR "
+    echo "  XrayR version      - Xem Các Phiên Bản XrayR"
+	echo "  nano /etc/XrayR/config.yml - Gọi Tệp Cấu Hình"
     echo "------------------------------------------"
 }
 
 show_menu() {
     echo -e "
-    Các tập lệnh quản lý phụ trợ XrayR，không hoạt động với docker${plain}
+    Các Tập Lệnh Quản Lý Phụ Trợ XrayR，Không Hoạt Động Với Docker${plain}
     ${green}--- [Nguyễn Nghị] ---${plain}
-    0. Thay đổi cài đặt
 ————————————————————————————————
-    1. Cài đặt XrayR
-    2. Cập nhật XrayR
-    3. Gỡ cài đặt XrayR
+    0. Thay Đổi Cài Đặt
 ————————————————————————————————
-    4. Khởi động XrayR
+    1. Cài Đặt XrayR
+————————————————————————————————
+    2. Cập Nhật XrayR
+————————————————————————————————
+    3. Gỡ Cài Đặt XrayR
+————————————————————————————————
+    4. Khởi Động XrayR
+————————————————————————————————
     5. Dừng XrayR
-    6. Khởi động lại XrayR
-    7. Xem trạng thái XrayR
-    8. Xem nhật ký XrayR
 ————————————————————————————————
-    9. Đặt XrayR để bắt đầu tự động
-   10. Hủy tự động khởi động XrayR
+    6. Khởi Động Lại XrayR
 ————————————————————————————————
-   11. Một cú nhấp chuột cài đặt bbr (hạt nhân mới nhất)
-   12. Xem các phiên bản XrayR
-   13. Nâng cấp Tập lệnh Bảo trì
+    7. Xem Trạng Thái XrayR
+————————————————————————————————
+    8. Xem Nhật Ný XrayR
+————————————————————————————————
+    9. Cài Đặt XrayR Tự Khởi Động
+————————————————————————————————
+   10. Hủy XrayR Tự Khởi Động
+————————————————————————————————
+   11. Một Click Cài Đặt BBR
+————————————————————————————————
+   12. Xem Các Phiên Bản XrayR
+————————————————————————————————
+   13. Nâng Cấp Tập Lệnh Bảo Trì
 ————————————————————————————————   
  "
  #Các bản cập nhật tiếp theo có thể được thêm vào chuỗi trên
     show_status
-    echo && read -p "  Vui lòng nhập một lựa chọn [0-13]: " num
+    echo && read -p "  Vui Lòng Nhập Một Lựa Chọn [0-13]: " num
 
     case "${num}" in
         0) config
@@ -443,7 +455,7 @@ show_menu() {
         ;;
         13) update_shell
         ;;
-        *) echo -e "  Vui lòng nhập số chính xác [0-13]${plain}"
+        *) echo -e "  Vui Lòng Nhập Số Chính Xác [0-13]${plain}"
         ;;
     esac
 }
