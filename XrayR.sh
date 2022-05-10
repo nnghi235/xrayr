@@ -158,7 +158,7 @@ uninstall() {
     rm /usr/local/XrayR/ -rf
 
     echo ""
-    echo -e "  Gỡ Cài Đặt Thành Công !, " # nếu bạn muốn xóa tập lệnh này, hãy chạy sau khi thoát tập lệnh rm /usr/bin/XrayR -f xóa"
+    echo -e "  Gỡ Cài Đặt Thành Công ! " # nếu bạn muốn xóa tập lệnh này, hãy chạy sau khi thoát tập lệnh rm /usr/bin/XrayR -f xóa"
     echo ""
 
     if [[ $# == 0 ]]; then
