@@ -372,7 +372,7 @@ show_usage() {
     echo "  Cách sử dụng tập lệnh quản lý XrayR: "
     echo "------------------------------------------"
     echo "  XrayR                      - Hiển Thị Menu Quản Trị"
-    echo "  XrayR start                - Khởi Động XrayR "
+    echo "  cd ../.. && XrayR start    - Khởi Động XrayR "
     echo "  XrayR stop                 - Dừng XrayR"
     echo "  XrayR restart              - Khởi Động Lại XrayR"
     echo "  XrayR status               - Xem Trạng Thái XrayR"
