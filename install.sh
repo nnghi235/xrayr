@@ -181,7 +181,7 @@ install_XrayR() {
     echo "  Cách Sử Dụng Tập Lệnh Quản Lý XrayR"
     echo "---------------------------------------------------------"
     echo "  XrayR                      - Hiển Thị Menu Quản Lý"
-    echo "  XrayR start                - Khởi Động XrayR"
+    echo "  cd ../.. && XrayR start    - Khởi Động XrayR"
     echo "  XrayR stop                 - Dừng XrayR"
     echo "  XrayR restart              - Khởi Động Lại XrayR"
     echo "  XrayR status               - Xem Trạng Thái XrayR"
