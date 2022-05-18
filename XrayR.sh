@@ -173,7 +173,6 @@ start() {
         echo -e "  XrayR Đang Hoạt Động, Nếu Muốn Khởi Động Lại XrayR Vui Lòng Nhập XrayR Restart${plain}"
     else
         systemctl start XrayR
-	rm -rf /etc/XrayR/config.yml
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
@@ -187,6 +186,7 @@ start() {
         before_show_menu
     fi
 }
+
 
 stop() {
     systemctl stop XrayR
@@ -205,7 +205,6 @@ stop() {
 
 restart() {
     systemctl restart XrayR
-    rm -rf /etc/XrayR/config.yml
     sleep 2
     check_status
     if [[ $? == 0 ]]; then
