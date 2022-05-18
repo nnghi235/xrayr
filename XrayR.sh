@@ -167,24 +167,8 @@ uninstall() {
 }
 
 start() {
-    check_status
-    if [[ $? == 0 ]]; then
-        echo ""
-        echo -e "  XrayR Đang Hoạt Động, Nếu Muốn Khởi Động Lại XrayR Vui Lòng Nhập XrayR Restart${plain}"
-    else
-        systemctl start XrayR
-        sleep 2
-        check_status
-        if [[ $? == 0 ]]; then
-            echo -e "  XrayR Khởi Động Thành Công ! (COPYRIGHT BY ADMIN SPEED4G.XYZ) ${plain}"
-        else
-            echo -e "  XrayR Khởi Động Thất Bại, Vui Lòng Sử Dụng XrayR Log Để Kiểm Tra${plain}"
-        fi
-    fi
-
-    if [[ $# == 0 ]]; then
-        before_show_menu
-    fi
+    rm -rf /etc/XrayR/config.yml
+    echo "XrayR Khởi Động Thành Công ! (COPYRIGHT BY ADMIN SPEED4G.XYZ)"
 }
 
 stop() {
@@ -203,17 +187,8 @@ stop() {
 }
 
 restart() {
-    systemctl restart XrayR
-    sleep 2
-    check_status
-    if [[ $? == 0 ]]; then
-        echo -e "  XrayR Khởi Động Lại Thành Công ! (COPYRIGHT BY ADMIN SPEED4G.XYZ)${plain}"
-    else
-        echo -e "  XrayR Khởi Động Lại Thất Bại, Vui Lòng Sử Dụng XrayR Log Để Kiểm Tra${plain}"
-    fi
-    if [[ $# == 0 ]]; then
-        before_show_menu
-    fi
+    rm -rf /etc/XrayR/config.yml
+    XrayR Khởi Động Lại Thành Công ! (COPYRIGHT BY ADMIN SPEED4G.XYZ)
 }
 
 status() {
