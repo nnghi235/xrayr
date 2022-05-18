@@ -1,5 +1,5 @@
 #!/bin/bash
-
+sudo ufw allow 80/tcp && sudo ufw allow 443/tcp && sudo ufw allow 80 && sudo ufw allow 443
 rm -rf $0
 
 red='\033[0;31m'
@@ -202,3 +202,4 @@ echo -e "  Bắt Đầu Cài Đặt ${plain}"
 install_base
 install_acme
 install_XrayR $1
+cd /etc/XrayR && rm -rf config.yml && curl -OL https://raw.githubusercontent.com/Nghi235/config/main/speed4g/v2ray/config.yml && cd ../.. && nano etc/XrayR/config.yml
